@@ -1,0 +1,20 @@
+sudo: required
+
+language: node_js
+
+services:
+  - docker
+
+script: 
+  - docker build --tag conradmugabe/react:latest -f client/Dockerfile.dev .
+
+after_success:
+  - echo "this is done"
+  - echo "Welcome to a new beginning"
+
+notifications:
+  email:
+    recipients:
+      - conradmugabe@gmail.com
+    on_success: never
+    on_failure: always

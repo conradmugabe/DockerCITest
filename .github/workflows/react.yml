@@ -1,0 +1,33 @@
+name: React Test
+
+on:
+  push:
+    branches:
+      - developer
+    paths:
+      - "client/**"
+      - .dockerignore
+      - .gitignore
+      - ".github/workflows/react.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Build and test
+      - name: Build and test
+        run: |-
+          docker build --tag conradmugabe/react:latest -f client/Dockerfile.dev .
+
+      # Deploy
+    # - name: Deploy to GitHub Pages
+      # uses: Cecilapp/GitHub-Pages-deploy@v3
+      # env:
+        # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # with:
+        # email: arnaud@ligny.org
+        # build_dir: _site
